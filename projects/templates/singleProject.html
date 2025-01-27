@@ -1,0 +1,10 @@
+{%extends 'navBar.html'%}
+{%block start%}
+
+<img src="{{project.featured_image.url}}" style="width: 500px;">
+<h1>{{ project.title }}</h1>
+{%for tag in tags%}
+<span style="border: 1px solid">{{tag}}</span>
+{%endfor%}
+<p>{{ project.description }}</p>
+{%endblock%}

@@ -1,0 +1,19 @@
+{%extends 'navBar.html'%}
+{%block start%}
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <h2>Delete Skill</h2>
+           <p>Are u sure, u want to delete?</p>
+            <br>
+            <a href="/account/">Cancel</a>
+            <form class="form" method="POST" action="">
+                {% csrf_token %}
+
+
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Confirm" />
+            </form>
+        </div>
+    </div>
+</main>
+{%endblock%}

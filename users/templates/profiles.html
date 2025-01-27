@@ -1,0 +1,54 @@
+{% extends 'navBar.html' %}
+{% block start %}
+<section class="hero-section text-center" style="background-color: purple; color: white; margin-top: -30px">
+  <div class="container container--narrow">
+      <div class="hero-section__box" >
+          <h2>CONNECT WITH <span>DEVELOPERS</span></h2>
+          <h2>FROM AROUND THE WORLD</h2>
+      </div>
+
+      <div class="hero-section__search">
+          <form id="searchForm" class="form" action="{% url 'profiles' %}" method="get">
+              <div class="form__field">
+                  <label for="formInput#search">Search Developers </label>
+                  <input class="input input--text" id="formInput#search" type="text" name="search_query"
+                      value="{{ search_query }}" placeholder="Search by developer name" />
+              </div>
+              <input class="btn btn--sub btn--lg" type="submit" value="Search" style="background-color: purple; color: white;"/>
+          </form>
+      </div>
+  </div>
+</section>
+<br>
+<br>
+<!-- Search Result: DevList -->
+<section class="devlist">
+  <div class="container">
+      <div class="row">
+          {% for profile in profiles %}
+          <div class="col-md-4 mb-4"> <!-- Bootstrap grid column for responsive layout -->
+              <div class="card">
+                  <a href="{%url 'userProfile' profile.id%}" class="card-body">
+                      <div class="d-flex align-items-center"> <!-- Flexbox for aligning the image and text -->
+                          <img class="avatar avatar--md rounded-circle" src="{{ profile.profile_image.url }}" style="width: 100px; height: 100px; margin-right: 15px;" alt="image" />
+                          <div>
+                              <h3 class="h5">{{ profile.name }}</h3>
+                              <h5 class="text-muted">{{ profile.short_intro|slice:"60" }}</h5>
+                          </div>
+                      </div>
+                      <p class="dev__info mt-3">{{ profile.short_bio|slice:"150" }}</p>
+                      <div class="dev__skills mt-2">
+                          {% for skill in profile.skills_set.all %}
+                          <span class="badge badge-pill badge-primary">
+                              {{ skill }}
+                          </span>
+                          {% endfor %}
+                      </div>
+                  </a>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+</section>
+{% endblock %}

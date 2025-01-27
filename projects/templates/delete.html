@@ -1,0 +1,9 @@
+{% extends 'navBar.html'%}
+{%block start%}
+<h4>Are you sure,you want to delete?</h4>
+<a href="{%url 'projects'%}">Go Back</a>
+<form action="" method="POST">
+    {%csrf_token%}
+<input type="submit" value="confirm">
+</form>
+{%endblock%}
