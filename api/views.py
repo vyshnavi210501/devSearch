@@ -7,7 +7,7 @@ from users.models import Profile
 from .serializers import ProfileSerializer
 
 @api_view(['GET'])
-def getData(request):
+def getProfiles(request):
     profileInfo=Profile.objects.all()
     serializers=ProfileSerializer(profileInfo,many=True)
     return Response(serializers.data)
@@ -18,3 +18,9 @@ def addData(request):
     if serializer.is_valid():
         serializer.save()
     return(Response(serializer.data))
+
+@api_view(['GET'])
+def getProfile(request,pk):
+    profileInfo=Profile.objects.get(id=pk)
+    serializers=ProfileSerializer(profileInfo,many=False)
+    return Response(serializers.data)
