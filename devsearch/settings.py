@@ -41,8 +41,27 @@ INSTALLED_APPS = [
     'projects.apps.ProjectsConfig',
     'users.apps.UsersConfig',
     'rest_framework',
-    'api'
+    'api',
+    
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),  # Token will expire in 1 day
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Optionally set the refresh token expiration (default 7 days)
+    'ROTATE_REFRESH_TOKENS': False,  # Set this to True to rotate refresh tokens (optional)
+    'BLACKLIST_AFTER_ROTATION': False,  # Set this to True to blacklist the refresh token after rotation (optional)
+    'ALGORITHM': 'HS256',  # Default algorithm for encoding (optional)
+    'SIGNING_KEY': 'your-secret-key',  # Secret key used to sign tokens (ensure you have this key set properly)
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,10 +99,21 @@ WSGI_APPLICATION = 'devsearch.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'devsearch',
+        'USER':'postgres',
+        'HOST': 'localhost',
+        'PASSWORD':'Ravula@2001',
+        'PORT':'5432'
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
